@@ -39,11 +39,11 @@ There can be multiple therapists defined. The prefix for the therapist refers to
 ## Input
 The tool expects the following files to be present in the import directory:
 - `clients_<year>.csv` for example: `clients_2017.csv`
-- `visits_<year>_<therapist>.csv` for example: `visits_2017_marieke.csv`
+- `visits_<year>_<therapist>.csv` for example: `visits_2017_maria.csv`
 
 ## Output
 The tool output a file to the output directory
-- `trips_<year>_<therapist>.csv` for example: `trips_2017_marieke.csv`
+- `trips_<year>_<therapist>.csv` for example: `trips_2017_maria.csv`
 
 The output csv file contains the following columns:
 - Date (formatted as dd-mm-yyy)
@@ -51,9 +51,3 @@ The output csv file contains the following columns:
 - From address (street, postal code and city)
 - To address (street, postal code and city)
 - Distance in kilometers
-
-## Settings
-The following setting are important:
-- Practice address
-- Therapists and their home addresses
-
