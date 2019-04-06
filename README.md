@@ -1,10 +1,12 @@
 # IncuraTravel Tool
 
-This tool takes as input 2 export files from Incura:
+This tool takes as input 2 CSV files, exported from Incura:
 1. Client list with addresses
 2. All visits made
 
-With this data the tool produces 1 output file:
+Please make sure that there are no headers or empty lines in the these CSV files. These files can be exported in Incura under: Management > Overzichten.
+
+With this data the tool produces 1 CSV output file:
 1. List all trips chronologically with distance in kilometers
 
 ## Usage
@@ -18,7 +20,7 @@ java IncuraTravel 2017 maria config.properties ./input ./output
 ```
 
 ## Config File
-The config file should have the following attributes:
+The config file is not included in the content. Please create this file `config.properties`. It should have the following attributes:
 ```
 practice.street=Hoofdstraat 1
 practice.postalcode=1234AA
