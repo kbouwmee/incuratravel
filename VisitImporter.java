@@ -57,7 +57,10 @@ public class VisitImporter{
     public void processFiles() 
     {    
         for (int i=0; i<files.length; i++) {
+        // check if all client exists, then processs the file
+          if(checkVisits(files[i]) == 0) {           
             importVisits(files[i]);
+          }
         } 
     }
 
@@ -120,6 +123,44 @@ public class VisitImporter{
         return v;
     }
 
+
+// check if clients exists for all Visits
+private int checkVisits(File f) {
+    BufferedReader br = null;
+    String line = "";
+    String cvsSplitBy = ";";
+    int notFound = 0;
+
+    try {
+        br = new BufferedReader(new FileReader(f));
+        while ((line = br.readLine()) != null) {
+            String[] visitLine = line.split(cvsSplitBy);
+                                                                
+            // find client
+            Client c = ci.find(Integer.parseInt(visitLine[0]));                
+            if(c == null) {
+                notFound++;
+                System.out.println("Client "+visitLine[0]+" not found for trip.");
+                                                                                                                                                                                         }
+                                                                                                                                                                                     }
+                                                                                                                                                                                  } catch (FileNotFoundException e) {
+                                                                                                                                                                                      e.printStackTrace();
+                                                                                                                                                                                  } catch (IOException e) {
+                                                                                                                                                                                      e.printStackTrace();
+                                                                                                                                                                                  } catch (NullPointerException e) {
+                                                                                                                                                                                      e.printStackTrace();
+                                                                                                                                                                                  }finally {
+                                                                                                                                                                                      if (br != null) {
+                                                                                                                                                                                          try {
+                                                                                                                                                                                             br.close();
+                                                                                                                                                                                                                                                                                                                                                             } catch (IOException e) {
+                                                                                                                                                                                                                                                                                                                                                                                 e.printStackTrace();
+                                                                                                                                                                                                                                                                                                                                                                                                 }
+                                                                                                                                                                                                                                                                                                                                                                                                             }
+                                                                                                                                                                                                                                                                                                                                                                                                                     }
+                                                                                                                                                                                                                                                                                                                                                                                                                             return notFound;
+                                                                                                                                                                                }
+  
     // process rows from file
     private void importVisits(File f) 
     {
@@ -153,6 +194,7 @@ public class VisitImporter{
                 // find client
                 Client c = ci.find(Integer.parseInt(visitLine[0]));                
                 if(c == null) {
+		    System.out.println("Client "+visitLine[0]+" not found while importing visit.");
                     throw new NullPointerException();
                 }
 
