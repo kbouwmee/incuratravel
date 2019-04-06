@@ -124,42 +124,42 @@ public class VisitImporter{
     }
 
 
-// check if clients exists for all Visits
-private int checkVisits(File f) {
-    BufferedReader br = null;
-    String line = "";
-    String cvsSplitBy = ";";
-    int notFound = 0;
+    // check if clients exists for all Visits
+    private int checkVisits(File f) {
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ";";
+        int notFound = 0;
 
-    try {
-        br = new BufferedReader(new FileReader(f));
-        while ((line = br.readLine()) != null) {
-            String[] visitLine = line.split(cvsSplitBy);
+        try {
+            br = new BufferedReader(new FileReader(f));
+            while ((line = br.readLine()) != null) {
+                String[] visitLine = line.split(cvsSplitBy);
                                                                 
-            // find client
-            Client c = ci.find(Integer.parseInt(visitLine[0]));                
-            if(c == null) {
-                notFound++;
-                System.out.println("Client "+visitLine[0]+" not found for trip.");
-                                                                                                                                                                                         }
-                                                                                                                                                                                     }
-                                                                                                                                                                                  } catch (FileNotFoundException e) {
-                                                                                                                                                                                      e.printStackTrace();
-                                                                                                                                                                                  } catch (IOException e) {
-                                                                                                                                                                                      e.printStackTrace();
-                                                                                                                                                                                  } catch (NullPointerException e) {
-                                                                                                                                                                                      e.printStackTrace();
-                                                                                                                                                                                  }finally {
-                                                                                                                                                                                      if (br != null) {
-                                                                                                                                                                                          try {
-                                                                                                                                                                                             br.close();
-                                                                                                                                                                                                                                                                                                                                                             } catch (IOException e) {
-                                                                                                                                                                                                                                                                                                                                                                                 e.printStackTrace();
-                                                                                                                                                                                                                                                                                                                                                                                                 }
-                                                                                                                                                                                                                                                                                                                                                                                                             }
-                                                                                                                                                                                                                                                                                                                                                                                                                     }
-                                                                                                                                                                                                                                                                                                                                                                                                                             return notFound;
-                                                                                                                                                                                }
+                // find client
+                Client c = ci.find(Integer.parseInt(visitLine[0]));                
+                if(c == null) {
+                    notFound++;
+                    System.out.println("Client "+visitLine[0]+" not found for trip.");
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return notFound;
+    }
   
     // process rows from file
     private void importVisits(File f) 
